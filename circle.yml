@@ -1,0 +1,19 @@
+dependencies:
+  pre:
+    - wget http://go-cli.s3-website-us-east-1.amazonaws.com/releases/latest/cf-cli_amd64.deb -qO temp.deb
+    - sudo dpkg -i temp.deb
+    - cf -v
+  cache_directories:
+    - node_modules
+
+deployment:
+  production:
+    branch: [master, 18f-pages]
+    commands:
+      - cf login -a https://api.cloud.gov -u gsa-ffd_deployer -p $CF_PASS -o gsa-ffd -s wds-production
+      - cf push
+  production:
+    branch: [staging, 18f-pages-staging]
+    commands:
+      - cf login -a https://api.cloud.gov -u gsa-ffd_deployer -p $CF_PASS -o gsa-ffd -s wds-staging
+      - cf push
