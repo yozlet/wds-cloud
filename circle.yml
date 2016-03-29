@@ -1,7 +1,7 @@
 dependencies:
   pre:
     - mkdir -p debs
-    - wget -N https://cli.run.pivotal.io/stable?release=debian64&source=pws -qO debs/temp.deb
+    - wget -nc -qO debs/temp.deb https://cli.run.pivotal.io/stable?release=debian64
     - sudo dpkg -i debs/temp.deb
     - cf -v
   cache_directories:
@@ -11,10 +11,12 @@ deployment:
   production:
     branch: [master, 18f-pages]
     commands:
+      - gulp website:build
       - cf login -a https://api.cloud.gov -u gsa-ffd_deployer -p $CF_PASS -o gsa-ffd -s wds-production
       - cf push
   production:
     branch: [staging, 18f-pages-staging]
     commands:
+      - gulp website:build
       - cf login -a https://api.cloud.gov -u gsa-ffd_deployer -p $CF_PASS -o gsa-ffd -s wds-staging
       - cf push
