@@ -1,7 +1,7 @@
 dependencies:
   pre:
     - mkdir -p debs
-    - wget -nc -qO debs/temp.deb https://cli.run.pivotal.io/stable?release=debian64
+    - wget -nc -O debs/temp.deb https://cli.run.pivotal.io/stable?release=debian64
     - sudo dpkg -i debs/temp.deb
     - cf -v
   cache_directories:
