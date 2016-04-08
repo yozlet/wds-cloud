@@ -23,4 +23,4 @@ deployment:
     commands:
       - gulp website:build
       - cf login -a https://api.cloud.gov -u gsa-ffd_deployer -p $CF_PASS -o gsa-ffd -s wds-staging
-      - cf push
+      - cf push wds-microsite-staging
